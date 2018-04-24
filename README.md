@@ -1,54 +1,39 @@
-# XMRig
+# HYCminer
 
-:warning: **If you mine Monero, Aeon, Sumokoin, Turtlecoin, Stellite, GRAFT, Haven Protocol, IPBC, [PLEASE READ](https://github.com/xmrig/xmrig/issues/482)!** :warning:
+HYCminer is a high performance Hycon (HYC) CPU miner, forked from [XMRig](https://github.com/xmrig/xmrig) release v2.6.3.
 
-[![Github All Releases](https://img.shields.io/github/downloads/xmrig/xmrig/total.svg)](https://github.com/xmrig/xmrig/releases)
-[![GitHub release](https://img.shields.io/github/release/xmrig/xmrig/all.svg)](https://github.com/xmrig/xmrig/releases)
-[![GitHub Release Date](https://img.shields.io/github/release-date-pre/xmrig/xmrig.svg)](https://github.com/xmrig/xmrig/releases)
-[![GitHub license](https://img.shields.io/github/license/xmrig/xmrig.svg)](https://github.com/xmrig/xmrig/blob/master/LICENSE)
-[![GitHub stars](https://img.shields.io/github/stars/xmrig/xmrig.svg)](https://github.com/xmrig/xmrig/stargazers)
-[![GitHub forks](https://img.shields.io/github/forks/xmrig/xmrig.svg)](https://github.com/xmrig/xmrig/network)
-
-XMRig is a high performance Monero (XMR) CPU miner, with official support for Windows.
-Originally based on cpuminer-multi with heavy optimizations/rewrites and removing a lot of legacy code, since version 1.0.0 completely rewritten from scratch on C++.
-
-* This is the **CPU-mining** version, there is also a [NVIDIA GPU version](https://github.com/xmrig/xmrig-nvidia) and [AMD GPU version]( https://github.com/xmrig/xmrig-amd).
-* [Roadmap](https://github.com/xmrig/xmrig/issues/106) for next releases.
-
-<img src="http://i.imgur.com/OKZRVDh.png" width="619" >
+* This is the **CPU-mining** version, there is also a [NVIDIA GPU version](https://github.com/team-hycon/xmrig-nvidia) and [AMD GPU version](https://github.com/team-hycon/xmrig-amd).
+* We plan on releasing our roadmap for next releases soon.
 
 #### Table of contents
 * [Features](#features)
 * [Download](#download)
 * [Usage](#usage)
 * [Algorithm variations](#algorithm-variations)
-* [Build](https://github.com/xmrig/xmrig/wiki/Build)
+* [Build](https://github.com/team-hycon/xmrig/wiki/Build)
 * [Common Issues](#common-issues)
 * [Other information](#other-information)
-* [Donations](#donations)
-* [Release checksums](#release-checksums)
 * [Contacts](#contacts)
 
 ## Features
+* Currently running Cryptonight v7
 * High performance.
-* Official Windows support.
 * Small Windows executable, without dependencies.
 * x86/x64 support.
 * Support for backup (failover) mining server.
 * keepalived support.
 * Command line options compatible with cpuminer.
-* CryptoNight-Lite support for AEON.
-* Smart automatic [CPU configuration](https://github.com/xmrig/xmrig/wiki/Threads).
+* Smart automatic [CPU configuration](https://github.com/team-hycon/xmrig/wiki/Threads).
 * Nicehash support
 * It's open source software.
 
 ## Download
-* Binary releases: https://github.com/xmrig/xmrig/releases
-* Git tree: https://github.com/xmrig/xmrig.git
-  * Clone with `git clone https://github.com/xmrig/xmrig.git` :hammer: [Build instructions](https://github.com/xmrig/xmrig/wiki/Build).
+* Binary releases: TBA
+* Git tree: https://github.com/team-hycon/cpu-miner.git
+    * Clone with `git clone https://github.com/team-hycon/cpu-miner.git` :hammer: [Build instructions](https://github.com/team-hycon/xmrig/wiki/Build).
 
 ## Usage
-Use [config.xmrig.com](https://config.xmrig.com/xmrig) to generate, edit or share configurations.
+See the example `config.json` to configure the miner.
 
 ### Options
 ```
@@ -95,8 +80,8 @@ Since version 0.8.0.
 
 ## Common Issues
 ### HUGE PAGES unavailable
-* Run XMRig as Administrator.
-* Since version 0.8.0 XMRig automatically enables SeLockMemoryPrivilege for current user, but reboot or sign out still required. [Manual instruction](https://msdn.microsoft.com/en-gb/library/ms190730.aspx).
+* Run HYCminer as Administrator.
+* Since version 0.8.0 HYCminer automatically enables SeLockMemoryPrivilege for current user, but reboot or sign out still required. [Manual instruction](https://msdn.microsoft.com/en-gb/library/ms190730.aspx).
 
 ## Other information
 * No HTTP support, only stratum protocol support.
@@ -117,19 +102,15 @@ Please note performance is highly dependent on system load. The numbers above ar
 * Try setup optimal cpu affinity.
 * Enable fast memory (Large/Huge pages).
 
-## Donations
-* XMR: `48edfHu7V9Z84YzzMa6fUueoELZ9ZRXq9VetWzYGzKt52XU5xvqgzYnDK9URnRoJMk1j8nLwEVsaSWJ4fhdUyZijBGUicoD`
-* BTC: `1P7ujsXeX7GxQwHNnJsRMgAdNkFZmNVqJT`
-
-## Release checksums
-### SHA-256
-```
-34d390a499d2098bce92e6b85b4858ee6255a7e2d4e03197ba4f6a759efe349c xmrig-2.6.4-xenial-amd64.tar.gz/xmrig-2.6.4/xmrig
-cb6792c092c14f0f25d5774049a0adec403877a4564956220dcd9ba0fc488c82 xmrig-2.6.4-gcc-win32.zip/xmrig.exe
-cb3c5619a8391f989c6a69135d890c3126eda9841b9dc591d44f02078a6fd49b xmrig-2.6.4-gcc-win64.zip/xmrig.exe
-ea2e92bb10d0482880f8d389b7915948e11f672ca8559b0901d8a8fa8e9d733e xmrig-2.6.4-msvc-win64.zip/xmrig.exe
-```
+## SHA256 for Windows Binary files
+    9ac62cf597973365a55715f993e7333f6d4f0ee8e1c92616a4dd97014e50d08f: certUtil -hashfile hycon-win-0.0.1-without-mhttpd/xmrig.exe sha256
+    1b0100df98846ad03f8eed073fd578b83366417c696cab4261d55ad213a5166e: certUtil -hashfile hycon-win-0.0.1/xmrig.exe sha256
 
 ## Contacts
-* support@xmrig.com
-* [reddit](https://www.reddit.com/user/XMRig/)
+* hycon@glosfer.com
+* [site](https://www.hycon.io)
+* [reddit](https://www.reddit.com/r/HYCON)
+* [facebook](https://www.facebook.com/teamHycon)
+* [instagram](https://www.instagram.com/teamhycon)
+* [medium](https://www.medium.com/@teamhycon)
+* [twitter](https://www.twitter.com/teamhycon)

@@ -7,6 +7,7 @@
  * Copyright 2017-2018 XMR-Stak    <https://github.com/fireice-uk>, <https://github.com/psychocrypt>
  * Copyright 2018      Lee Clagett <https://github.com/vtnerd>
  * Copyright 2016-2018 XMRig       <https://github.com/xmrig>, <support@xmrig.com>
+ * Copyright 2018      Team-Hycon  <https://github.com/Team-Hycon>
  *
  *   This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -30,7 +31,6 @@
 #include "workers/CpuThread.h"
 #include "workers/MultiWorker.h"
 #include "workers/Workers.h"
-
 
 template<size_t N>
 MultiWorker<N>::MultiWorker(Handle *handle)
@@ -105,8 +105,9 @@ void MultiWorker<N>::start()
             m_thread->fn(m_state.job.variant())(m_state.blob, m_state.job.size(), m_hash, m_ctx);
 
             for (size_t i = 0; i < N; ++i) {
-                if (*reinterpret_cast<uint64_t*>(m_hash + (i * 32) + 24) < m_state.job.target()) {
-                    Workers::submit(JobResult(m_state.job.poolId(), m_state.job.id(), *nonce(i), m_hash + (i * 32), m_state.job.diff(), m_state.job.algorithm()));
+                uint64_t* hash = reinterpret_cast<uint64_t*>(&m_hash[(i * LEN::RESULT)]);
+                if ( hash[3] < m_state.job.target() ) {
+                    Workers::submit(JobResult(m_state.job.poolId(), m_state.job.jobId(), *hyconNonce(i), m_hash + (i * LEN::RESULT), m_state.job.diff(), m_state.job.algorithm()));
                 }
 
                 *nonce(i) += 1;
@@ -125,7 +126,7 @@ void MultiWorker<N>::start()
 template<size_t N>
 bool MultiWorker<N>::resume(const Job &job)
 {
-    if (m_state.job.poolId() == -1 && job.poolId() >= 0 && job.id() == m_pausedState.job.id()) {
+    if (m_state.job.poolId() == -1 && job.poolId() >= 0 && job.jobId() == m_pausedState.job.jobId()) {
         m_state = m_pausedState;
         return true;
     }
@@ -179,7 +180,7 @@ void MultiWorker<N>::consumeJob()
             *nonce(i) = (*nonce(i) & 0xff000000U) + (0xffffffU / m_totalWays * (m_offset + i));
         }
         else {
-           *nonce(i) = 0xffffffffU / m_totalWays * (m_offset + i);
+           *nonce(i)  = 0xffffffffU / m_totalWays * (m_offset + i);
         }
     }
 }
